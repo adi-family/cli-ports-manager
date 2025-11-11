@@ -1,10 +1,12 @@
-# Ports Manager
+<div align="center">
+  <img src=".github/banner.png" alt="Ports Manager Banner" width="100%">
 
-[![CI](https://github.com/mgorunuch/ports-manager/workflows/CI/badge.svg)](https://github.com/mgorunuch/ports-manager/actions/workflows/ci.yml)
-[![Security Audit](https://github.com/mgorunuch/ports-manager/workflows/Security%20Audit/badge.svg)](https://github.com/mgorunuch/ports-manager/actions/workflows/security.yml)
-[![Crates.io](https://img.shields.io/crates/v/ports-manager.svg)](https://crates.io/crates/ports-manager)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Rust Version](https://img.shields.io/badge/rust-1.70%2B-blue.svg)](https://www.rust-lang.org)
+  [![CI](https://github.com/mgorunuch/ports-manager/workflows/CI/badge.svg)](https://github.com/mgorunuch/ports-manager/actions/workflows/ci.yml)
+  [![Security Audit](https://github.com/mgorunuch/ports-manager/workflows/Security%20Audit/badge.svg)](https://github.com/mgorunuch/ports-manager/actions/workflows/security.yml)
+  [![Crates.io](https://img.shields.io/crates/v/ports-manager.svg)](https://crates.io/crates/ports-manager)
+  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+  [![Rust Version](https://img.shields.io/badge/rust-1.70%2B-blue.svg)](https://www.rust-lang.org)
+</div>
 
 A simple, fast, and reliable Rust CLI tool for managing port mappings. Configuration is stored in dotfiles at `~/.config/ports-manager/config.toml`.
 
