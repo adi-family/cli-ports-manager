@@ -99,16 +99,15 @@ jobs:
     needs: build-release
     runs-on: ubuntu-latest
     steps:
-      - name: Update Homebrew formula
-        uses: mislav/bump-homebrew-formula-action@v3
-        with:
-          formula-name: ports-manager
-          formula-path: Formula/ports-manager.rb
-          homebrew-tap: adi-family/homebrew-ports-manager
-          download-url: https://github.com/adi-family/cli-ports-manager/releases/download/${{ github.ref_name }}/ports-manager-macos-arm64
-          commit-message: |
-            {{formulaName}} {{version}}
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            Created by https://github.com/mislav/bump-homebrew-formula-action
+      - name: Update Homebrew formula
         env:
-          COMMITTER_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+        run: |
+          # Configure git to use the token for authentication
+          git config --global url."https://x-access-token:${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
+
+          # Run the update script
+          bash .github/scripts/update-homebrew-formula.sh ${{ github.ref_name }}
