@@ -152,7 +152,7 @@ mod tests {
         assert!(!exclude2.contains(&port2));
 
         // Both should be in the valid range
-        assert!(port1 >= 8000 && port1 <= 8010);
-        assert!(port2 >= 8000 && port2 <= 8010);
+        assert!((8000..=8010).contains(&port1));
+        assert!((8000..=8010).contains(&port2));
     }
 }
