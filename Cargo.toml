@@ -1,6 +1,6 @@
 [package]
 name = "ports-manager"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Ihor Herasymovych <adi@the-ihor.com>"]
 description = "A simple, fast, and reliable CLI tool for managing port mappings"
