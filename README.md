@@ -10,7 +10,20 @@ A simple, fast, and reliable Rust CLI tool for managing port mappings. Configura
 
 ## Installation
 
-### From Crates.io (Recommended)
+### Homebrew (macOS/Linux)
+
+```bash
+brew tap adi-family/ports-manager
+brew install ports-manager
+```
+
+Or install directly:
+
+```bash
+brew install adi-family/ports-manager/ports-manager
+```
+
+### From Crates.io
 
 ```bash
 cargo install ports-manager
