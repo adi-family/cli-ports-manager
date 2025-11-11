@@ -1,7 +1,17 @@
 [package]
 name = "ports-manager"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = ["Ihor Herasymovych <adi@the-ihor.com>"]
+description = "A simple, fast, and reliable CLI tool for managing port mappings"
+documentation = "https://github.com/mgorunuch/ports-manager"
+readme = "README.md"
+homepage = "https://github.com/mgorunuch/ports-manager"
+repository = "https://github.com/mgorunuch/ports-manager"
+license = "MIT"
+keywords = ["cli", "ports", "networking", "devtools", "configuration"]
+categories = ["command-line-utilities", "development-tools", "config"]
+rust-version = "1.70"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }

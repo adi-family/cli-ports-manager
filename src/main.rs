@@ -2,7 +2,7 @@ mod config;
 mod port_finder;
 
 use clap::{Parser, Subcommand};
-use config::{Config, PortSpec};
+use config::{Config, DefaultsConfig, PortSpec};
 
 #[derive(Parser)]
 #[command(name = "ports-manager")]
@@ -36,6 +36,10 @@ enum Commands {
     },
     /// List all port mappings
     List,
+    /// Reset defaults.toml to built-in default port mappings
+    ResetDefaults,
+    /// Sync defaults.toml with newer versions (preserves ignored entries)
+    SyncDefaults,
 }
 
 fn main() {
@@ -50,7 +54,11 @@ fn main() {
     };
 
     match cli.command {
-        Commands::Set { name, port, description } => {
+        Commands::Set {
+            name,
+            port,
+            description,
+        } => {
             let port_spec = match PortSpec::parse(&port) {
                 Ok(spec) => spec,
                 Err(e) => {
@@ -106,7 +114,7 @@ fn main() {
             if ports.is_empty() {
                 println!("No port mappings configured");
             } else {
-                println!("{:<20} {:<15} {}", "Name", "Port", "Description");
+                println!("{:<20} {:<15} Description", "Name", "Port");
                 println!("{}", "-".repeat(60));
                 for mapping in ports {
                     println!(
@@ -118,5 +126,32 @@ fn main() {
                 }
             }
         }
+        Commands::ResetDefaults => {
+            if let Err(e) = DefaultsConfig::reset() {
+                eprintln!("Error resetting defaults: {}", e);
+                std::process::exit(1);
+            }
+            eprintln!("Default ports reset successfully");
+            eprintln!("File location: ~/.config/ports-manager/defaults.toml");
+            eprintln!("You can edit this file to customize default port mappings");
+        }
+        Commands::SyncDefaults => match DefaultsConfig::sync() {
+            Ok(diff) => {
+                eprintln!("Defaults synchronized successfully");
+                if diff > 0 {
+                    eprintln!("  - {} new default(s) added", diff);
+                } else if diff < 0 {
+                    eprintln!("  - {} default(s) removed", -diff);
+                } else {
+                    eprintln!("  - No changes (already up to date)");
+                }
+                eprintln!("\nFile location: ~/.config/ports-manager/defaults.toml");
+                eprintln!("\nTip: Add defaults to 'ignored_defaults' array in config.toml to exclude them");
+            }
+            Err(e) => {
+                eprintln!("Error syncing defaults: {}", e);
+                std::process::exit(1);
+            }
+        },
     }
 }

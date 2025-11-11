@@ -5,12 +5,7 @@ pub fn find_available_port(exclude_ports: &[u16]) -> Option<u16> {
 }
 
 pub fn find_available_port_in_range(start: u16, end: u16, exclude_ports: &[u16]) -> Option<u16> {
-    for port in start..=end {
-        if !exclude_ports.contains(&port) && is_port_available(port) {
-            return Some(port);
-        }
-    }
-    None
+    (start..=end).find(|&port| !exclude_ports.contains(&port) && is_port_available(port))
 }
 
 fn is_port_available(port: u16) -> bool {
@@ -112,12 +107,12 @@ mod tests {
         let result = find_available_port(&exclude);
         assert!(result.is_some());
         let port = result.unwrap();
-        assert!(port >= 8100 || port < 8000);
+        assert!(!(8000..8100).contains(&port));
     }
 
     #[test]
     fn test_find_available_port_empty_exclude_list() {
-        let result = find_available_port(&vec![]);
+        let result = find_available_port(&[]);
         assert!(result.is_some());
         assert!(result.unwrap() >= 8000);
     }

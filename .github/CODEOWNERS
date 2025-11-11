@@ -1,0 +1,9 @@
+# Default owners for everything in the repo
+*       @mgorunuch
+
+# Workflow files
+/.github/workflows/  @mgorunuch
+
+# Cargo configuration
+/Cargo.toml  @mgorunuch
+/Cargo.lock  @mgorunuch
