@@ -666,7 +666,7 @@ mod tests {
 
         let used = config.get_used_ports();
         // Must include the port we added, may include defaults
-        assert!(used.len() >= 1);
+        assert!(!used.is_empty());
         assert!(used.contains(&8080));
     }
 
