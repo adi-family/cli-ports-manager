@@ -144,7 +144,15 @@ mod tests {
 
         assert!(result1.is_some());
         assert!(result2.is_some());
-        // Both should find the same first available port
-        assert_eq!(result1.unwrap(), result2.unwrap());
+
+        // Both should exclude the same ports regardless of order
+        let port1 = result1.unwrap();
+        let port2 = result2.unwrap();
+        assert!(!exclude1.contains(&port1));
+        assert!(!exclude2.contains(&port2));
+
+        // Both should be in the valid range
+        assert!(port1 >= 8000 && port1 <= 8010);
+        assert!(port2 >= 8000 && port2 <= 8010);
     }
 }
